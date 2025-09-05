@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Semanal - 29/08 a 04/09</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #667eea;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 3px;
+        }
+
+        .performance-notes {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #e3e8ff;
+            font-size: 1.1em;
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .metric-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-label {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric-value {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .notes-list {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #e3e8ff;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+
+        .notes-list ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .notes-list li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .notes-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .script-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .script-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+        }
+
+        .script-section h4 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .script-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .script-item:last-child {
+            border-bottom: none;
+        }
+
+        .percentage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .percentage-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .percentage-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .percentage-value {
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+        .links-list {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e3e8ff;
+        }
+
+        .links-list a {
+            display: block;
+            color: #667eea;
+            text-decoration: none;
+            padding: 8px 0;
+            transition: color 0.3s ease;
+        }
+
+        .links-list a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .script-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Relatório Semanal</h1>
+            <p>Período: 29/08 a 04/09</p>
+        </div>
+        
+        <div class="content">
+            <!-- Seção 1: Performance da Loja -->
+            <div class="section">
+                <h2 class="section-title">📊 Performance da Loja</h2>
+                <div class="performance-notes">📊 Performance da Loja | 29/08 a 04/09
+
+Faturamento: R$126.131,13 (+21,85% vs semana anterior)
+
+Pedidos pagos: 608 (587 pedidos, 21 upsell)
+
+Ticket médio: R$214,73 (↓ de R$217,46)
+
+Conversão checkout: 44,76% (↑ acima da média)
+
+Clientes recorrentes: 46% (↓ de 56%)
+
+📦 Mix de Vendas:
+
+260 S-Control (25,76% do faturamento)
+
+215 Kits (41,48%)
+
+📌 Observações da semana:
+
+32% do investimento em Meta ficou em fase de aprendizado, afetando performance.
+
+Queda na performance do dia a partir de segunda após ajuste do MOFU para novo padrão (adset único).
+
+Página do Bakuchiol finalizada, fase de teste iniciada em 04/09 com estáticos, tivemos 1 venda.</div>
+            </div>
+
+            <!-- Seção 2: Financeiro -->
+            <div class="section">
+                <h2 class="section-title">💰 Financeiro</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Vendas</div>
+                        <div class="metric-value">583</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Faturamento Marketplaces</div>
+                        <div class="metric-value">2,27%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Conversão de Checkout</div>
+                        <div class="metric-value">44,8%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Clientes Recorrentes</div>
+                        <div class="metric-value">46,00%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Custo de Produto</div>
+                        <div class="metric-value">22,83%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Gasto em Anúncios</div>
+                        <div class="metric-value">R$ 72.920,91</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Margem</div>
+                        <div class="metric-value">1,12%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Lucro</div>
+                        <div class="metric-value">R$ 1.908,46</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Conversão de PIX</div>
+                        <div class="metric-value">40,82%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Cartões Recusados</div>
+                        <div class="metric-value">1,04%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção 3: Ações de Marketing -->
+            <div class="section">
+                <h2 class="section-title">📢 Ações de Marketing</h2>
+                <div class="notes-list">
+                    <ul>
+                        <li>Definimos oferta de lançamento + ações de tiktokshop</li>
+                        <li>Calendário pinkclub on</li>
+                        <li>Copys de apresentação do kit, dos unitarios e da oferta feitas e escoadas</li>
+                        <li>2 entregas de formato entrevista feitas - evento</li>
+                        <li>Reorganização escopo ray e gabi entre conteudo e ações social</li>
+                        <li>Programa de embaixadoras on e prospecções ativas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Seção 4: Copy Scripts -->
+            <div class="section">
+                <h2 class="section-title">📝 Copy Scripts</h2>
+                <div class="script-grid">
+                    <div class="script-section">
+                        <h4>Total Scripts</h4>
+                        <div class="script-item">
+                            <span>Total Scripts</span>
+                            <span><strong>13</strong></span>
+                        </div>
+                        <div class="script-item">
+                            <span>Gloss</span>
+                            <span>0</span>
+                        </div>
+                        <div class="script-item">
+                            <span>Gel Secativo</span>
+                            <span>2</span>
+                        </div>
+                        <div class="script-item">
+                            <span>S-Control</span>
+                            <span>1</span>
+                        </div>
+                        <div class="script-item">
+                            <span>Gel Limpeza</span>
+                            <span>1</span>
+                        </div>
+                        <div class="script-item">
+                            <span>Backutiól</span>
+                            <span>7</span>
+                        </div>
+                        <div class="script-item">
+                            <span>Kits</span>
+                            <span>2</span>
+                        </div>
+                        <div class="script-item">
+                            <span>Copy de Infra</span>
+                            <span>2</span>
+                        </div>
+                    </div>
+                    <div class="script-section">
+                        <h4>Escoamentos Novos Totais</h4>
+                        <div class="script-item">
+                            <span>Total</span>
+                            <span><strong>10</strong></span>
+                        </div>
+                        <div class="script-item">
+                            <span>Gloss</span>
+                            <span>0</span>
+                        </div>
+                        <div class="script-item">
+                            <span>Gel Secativo</span>
+                            <span>2</span>
+                        </div>
+                        <div class="script-item">
+                            <span>S-Control</span>
+                            <span>1</span>
+                        </div>
+                        <div class="script-item">
+                            <span>Gel Limpeza</span>
+                            <span>0</span>
+                        </div>
+                        <div class="script-item">
+                            <span>Backutiól</span>
+                            <span>6</span>
+                        </div>
+                        <div class="script-item">
+                            <span>Kits</span>
+                            <span>1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção 5: Conteúdo -->
+            <div class="section">
+                <h2 class="section-title">📱 Conteúdo</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Prospecções da Semana</div>
+                        <div class="metric-value">7</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Embaixadoras</div>
+                        <div class="metric-value">5</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Influencers Macro</div>
+                        <div class="metric-value">2</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Em Negociação</div>
+                        <div class="metric-value">9</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Embaixadoras (Negoc.)</div>
+                        <div class="metric-value">7</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Influencers Macro (Negoc.)</div>
+                        <div class="metric-value">2</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Envios de Produto</div>
+                        <div class="metric-value">26</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Escoamentos Testes</div>
+                        <div class="metric-value">3</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Embaixadoras Ativas</div>
+                        <div class="metric-value">48</div>
+                    </div>
+                </div>
+                
+                <h4 style="margin: 30px 0 15px 0; color: #495057;">TikTok Shop</h4>
+                <div class="metrics-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="metric-card">
+                        <div class="metric-label">Amostras Enviadas</div>
+                        <div class="metric-value">3</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Vídeos Postados</div>
+                        <div class="metric-value">0</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Vídeos Avaliados</div>
+                        <div class="metric-value">8</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção 6: Social Media -->
+            <div class="section">
+                <h2 class="section-title">📲 Social Media</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Posts no Feed</div>
+                        <div class="metric-value">11</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Próprios</div>
+                        <div class="metric-value">5</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Collabs</div>
+                        <div class="metric-value">6</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Stories</div>
+                        <div class="metric-value">139</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Stories Próprios</div>
+                        <div class="metric-value">37</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Reposts</div>
+                        <div class="metric-value">102</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">YouTube Shorts</div>
+                        <div class="metric-value">0</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Posts TikTok</div>
+                        <div class="metric-value">3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção 7: Vendas em Cupons -->
+            <div class="section">
+                <h2 class="section-title">🎫 Vendas em Cupons</h2>
+                <div class="metrics-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <div class="metric-card">
+                        <div class="metric-label">Total</div>
+                        <div class="metric-value">R$ 60.581,00</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Da Semana</div>
+                        <div class="metric-value">R$ 14.652,00</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Acumulado do Mês</div>
+                        <div class="metric-value">R$ 45.929,00</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção 8: Grupos -->
+            <div class="section">
+                <h2 class="section-title">👥 Grupos</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Interações do Grupo</div>
+                        <div class="metric-value">1</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Entradas</div>
+                        <div class="metric-value">138</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Saídas</div>
+                        <div class="metric-value">10</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Diferença</div>
+                        <div class="metric-value">128</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Email Respondidos</div>
+                        <div class="metric-value">159</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">DMs Respondidas</div>
+                        <div class="metric-value">67</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Reclame Aqui</div>
+                        <div class="metric-value">1</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção 9: Esteira de Anúncios -->
+            <div class="section">
+                <h2 class="section-title">🎬 Esteira de Anúncios</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Materiais Recebidos</div>
+                        <div class="metric-value">13</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Escoados</div>
+                        <div class="metric-value">11</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">De Teste</div>
+                        <div class="metric-value">2</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Edições de Ads - Total</div>
+                        <div class="metric-value">9</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Vídeos</div>
+                        <div class="metric-value">8</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Estáticos</div>
+                        <div class="metric-value">1</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Social</div>
+                        <div class="metric-value">7</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Entregas Gerais Infra</div>
+                        <div class="metric-value">13</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Entregas Gerais E-mail</div>
+                        <div class="metric-value">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção 10: % das Vendas -->
+            <div class="section">
+                <h2 class="section-title">📊 Distribuição das Vendas</h2>
+                <div class="percentage-grid">
+                    <div class="percentage-item">
+                        <div class="percentage-label">SM</div>
+                        <div class="percentage-value">18,53%</div>
+                    </div>
+                    <div class="percentage-item">
+                        <div class="percentage-label">SalesArmy</div>
+                        <div class="percentage-value">1,67%</div>
+                    </div>
+                    <div class="percentage-item">
+                        <div class="percentage-label">Orgânico</div>
+                        <div class="percentage-value">3,29%</div>
+                    </div>
+                    <div class="percentage-item">
+                        <div class="percentage-label">Email</div>
+                        <div class="percentage-value">1,15%</div>
+                    </div>
+                    <div class="percentage-item">
+                        <div class="percentage-label">Facebook</div>
+                        <div class="percentage-value">57,38%</div>
+                    </div>
+                    <div class="percentage-item">
+                        <div class="percentage-label">Google</div>
+                        <div class="percentage-value">10,68%</div>
+                    </div>
+                    <div class="percentage-item">
+                        <div class="percentage-label">TikTok</div>
+                        <div class="percentage-value">0%</div>
+                    </div>
+                    <div class="percentage-item">
+                        <div class="percentage-label">Mercado Livre</div>
+                        <div class="percentage-value">2,27%</div>
+                    </div>
+                    <div class="percentage-item">
+                        <div class="percentage-label">Amazon</div>
+                        <div class="percentage-value">0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção 11: Tráfego -->
+            <div class="section">
+                <h2 class="section-title">🚀 Tráfego</h2>
+                <div class="metrics-grid" style="grid-template-columns: repeat(4, 1fr);">
+                    <div class="metric-card">
+                        <div class="metric-label">Testes da Semana</div>
+                        <div class="metric-value">14</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Em Teste</div>
+                        <div class="metric-value">9</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Validados</div>
+                        <div class="metric-value">3</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Não Validados</div>
+                        <div class="metric-value">2</div>
+                    </div>
+                </div>
+                
+                <h4 style="margin: 25px 0 15px 0; color: #495057;">Links dos Melhores Validados:</h4>
+                <div class="links-list">
+                    <a href="https://app.clickup.com/t/86aayvhyg" target="_blank">https://app.clickup.com/t/86aayvhyg</a>
+                    <a href="https://app.clickup.com/t/86aayuuj0" target="_blank">https://app.clickup.com/t/86aayuuj0</a>
+                    <a href="https://app.clickup.com/t/86ab4me1q" target="_blank">https://app.clickup.com/t/86ab4me1q</a>
+                </div>
+            </div>
+
+            <!-- Seção 12: Modificações Infra -->
+            <div class="section">
+                <h2 class="section-title">⚙️ Modificações de Infraestrutura</h2>
+                <div class="notes-list">
+                    <ul>
+                        <li>Criação da página do bakuchiol</li>
+                        <li>Ajuste de asset das páginas</li>
+                        <li>Rotação do gloss cherry para o espresso</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Seção 13: Suporte -->
+            <div class="section">
+                <h2 class="section-title">🛠️ Suporte</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Ocorrências Total</div>
+                        <div class="metric-value">2,58%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Trocas</div>
+                        <div class="metric-value">0,00%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Devoluções</div>
+                        <div class="metric-value">0,00%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Reenvios</div>
+                        <div class="metric-value">1,37%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Cancelados</div>
+                        <div class="metric-value">0,17%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Estorno 100%</div>
+                        <div class="metric-value">0%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Estorno 50%</div>
+                        <div class="metric-value">0,17%</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Estorno Parcial</div>
+                        <div class="metric-value">0,86%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
